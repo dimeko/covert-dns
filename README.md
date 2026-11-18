@@ -1,7 +1,7 @@
 ### covert-dns
 
-`covert-dns` is a set od utils that let you send JSON data over DNS queries. It can be used as a covert communication channel.
-The messages are encoded in base64 and split in chunks to be sent back and forth as DNS queries and DNS answers.
+`covert-dns` is a set of utils that let you send JSON data over DNS queries. It can be used as a covert communication channel.
+The messages are encoded in base64 and split in chunks to be sent back and forth as DNS queries and DNS answers respectively.
 
 So if an object is encoded to a base64:
 ```bash
