@@ -78,6 +78,7 @@ func main() {
 	signal.Notify(shutdown, os.Interrupt, syscall.SIGTERM)
 	<-shutdown
 	_, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+
 	log.Println("Shutting down server gracefully in 1 second.")
 	time.Sleep(time.Second)
 	defer cancel()

@@ -9,13 +9,18 @@ import (
 	libcovertdns "github.com/dimeko/covert-dns/pkg"
 )
 
-var AES_KEY = []byte("0123456789abcdef")
+var (
+	AES_KEY = []byte("0123456789abcdef")
+	port    = "12341" // default port
+	server  = "127.0.0.1"
+)
 
 type SliceItem struct {
 	Item string `json:"item"`
 }
+
 type RequestPayload struct {
-	// Field1  string
+	Field1  string            `json:"field1"`
 	Field2  string            `json:"field2"`
 	Field3  string            `json:"field3"`
 	Field4  string            `json:"field4"`
@@ -61,9 +66,7 @@ func Send(client *libcovertdns.DNSClient, payload RequestPayload, wg *sync.WaitG
 }
 
 func main() {
-	fmt.Println("Client started")
-	port := "12341" // default port
-	server := "127.0.0.1"
+
 	if len(os.Args) > 3 {
 		for i := 0; i < len(os.Args); i++ {
 			if os.Args[i] == "-p" && i+1 < len(os.Args) {
@@ -78,6 +81,7 @@ func main() {
 		log.Println("Usage: go run main.go -p <port> -s <server>")
 		return
 	}
+
 	fmt.Println("Connecting to server:", server, "on port:", port)
 	_client, err := libcovertdns.NewDNSClient(server, port, 1, 500, nil)
 	if err != nil {
@@ -92,7 +96,7 @@ func main() {
 	for counter < 3 {
 		wg.Add(1)
 		bigStructInstance := RequestPayload{
-			// Field1:  "Value1",
+			Field1:  "Value1",
 			Field2:  "Value2Value2Value2Value2Value2Value2Value2Value2Value2Value2Value2Value2",
 			Field3:  "Value3Value3Value3Value3Value3Value3Value3Value3Value3Value3Value3Value3Value3Value3Value3Value3Value3Value3Value3Value3Value3Value3Value3Value3Value3",
 			Field4:  "Value4",
